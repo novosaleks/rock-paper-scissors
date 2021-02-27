@@ -1,0 +1,32 @@
+.app-header {
+  margin-top: 3rem;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 4px hsl(217, 16%, 45%) solid;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+
+    &-score {
+      line-height: 1;
+      padding: 0.7rem;
+      width: 180px;
+      border-radius: 15px;
+      background-color: #fbfbfb;
+      text-align: center;
+
+      .score_label {
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: hsl(229, 64%, 46%);
+      }
+
+      .score_point {
+        font-size: 5rem;
+        color: #59556c;
+      }
+    }
+  }
+}
