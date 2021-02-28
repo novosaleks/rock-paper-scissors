@@ -1,0 +1,13 @@
+
+.game-result {
+  padding-top: 150px;
+
+  &__title {
+    font-size: 4.5rem;
+  }
+
+  &__reset {
+    width: 100px;
+    height: 30px;
+  }
+}

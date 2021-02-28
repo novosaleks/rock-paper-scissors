@@ -1,0 +1,12 @@
+.game-process {
+  margin-top: 3rem;
+
+  &-selection {
+    text-align: center;
+  }
+
+  &__item {
+    width: 300px;
+    margin: 3rem auto 0;
+  }
+}

@@ -1,44 +1,35 @@
 import React from 'react';
 
 import pentagon from '../../assets/images/bg-pentagon.svg';
-import rock from '../../assets/icons/icon-rock.svg';
-import lizard from '../../assets/icons/icon-lizard.svg';
-import paper from '../../assets/icons/icon-paper.svg';
-import scissors from '../../assets/icons/icon-scissors.svg';
-import spock from '../../assets/icons/icon-spock.svg';
 
 import './AppInterface.scss';
+import GameItem from '../GameItem';
+import { gameItems } from '../../types';
 
-const AppInterface: React.FC = () => {
+interface AppInterfaceProps {
+    selectItem: (gameItem: gameItems) => void;
+}
+
+const AppInterface: React.FC<AppInterfaceProps> = ({selectItem}) => {
     return (
         <section className='app-interface'>
             <div className="container">
                 <div className="app-interface__field">
                     <img src={pentagon} alt="pentagon"/>
-                    <div className="app-interface__wrapper">
-                        <div className="app-interface__item">
-                            <img src={spock} alt="rock"/>
-                        </div>
+                    <div className="app-interface__wrapper" onClick={() => selectItem('spock')}>
+                        <GameItem type='spock' modifier='md'/>
                     </div>
-                    <div className="app-interface__wrapper">
-                        <div className="app-interface__item">
-                            <img src={scissors} alt="rock"/>
-                        </div>
+                    <div className="app-interface__wrapper" onClick={() => selectItem('scissors')}>
+                        <GameItem type='scissors' modifier='md'/>
                     </div>
-                    <div className='app-interface__wrapper'>
-                        <div className="app-interface__item">
-                            <img src={paper} alt="rock"/>
-                        </div>
+                    <div className='app-interface__wrapper' onClick={() => selectItem('paper')}>
+                        <GameItem type='paper' modifier='md'/>
                     </div>
-                    <div className="app-interface__wrapper">
-                        <div className="app-interface__item">
-                            <img src={rock} alt="rock"/>
-                        </div>
+                    <div className="app-interface__wrapper" onClick={() => selectItem('rock')}>
+                        <GameItem type='rock' modifier='md'/>
                     </div>
-                    <div className="app-interface__wrapper">
-                        <div className="app-interface__item">
-                            <img src={lizard} alt="rock"/>
-                        </div>
+                    <div className="app-interface__wrapper" onClick={() => selectItem('lizard')}>
+                        <GameItem type='lizard' modifier='md'/>
                     </div>
                 </div>
             </div>

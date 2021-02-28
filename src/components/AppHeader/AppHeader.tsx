@@ -4,7 +4,11 @@ import './AppHeader.scss'
 
 import logo from '../../assets/images/logo-bonus.svg'
 
-const AppHeader: React.FC = () => {
+interface AppHeaderProps {
+    score: number
+}
+
+const AppHeader: React.FC<AppHeaderProps> = ({score}) => {
     return (
         <header className='app-header'>
             <div className="container">
@@ -12,7 +16,7 @@ const AppHeader: React.FC = () => {
                     <a href="/"><img src={logo} alt="logo"/></a>
                     <div className="app-header__content-score">
                         <div className='score_label'>SCORE</div>
-                        <div className='score_point'>0</div>
+                        <div className='score_point'>{score}</div>
                     </div>
                 </div>
             </div>
