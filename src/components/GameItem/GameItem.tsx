@@ -7,22 +7,21 @@ import scissors from '../../assets/icons/icon-scissors.svg';
 import lizard from '../../assets/icons/icon-lizard.svg';
 
 import './GameItem.scss';
-import { gameItems } from '../../types';
+import { gameItems } from '../../utils/types';
 
 interface GameItemProps {
     type: gameItems;
-    modifier: 'md' | 'bg';
 }
 
 type imgUrlKeys = {
     rock: any, spock: any, paper: any, scissors: any, lizard: any;
 }
 
-const GameItem: React.FC<GameItemProps> = ({ type, modifier }) => {
+const GameItem: React.FC<GameItemProps> = ({ type}) => {
     const imgUrl: imgUrlKeys = { rock, spock, paper, scissors, lizard };
 
     return (
-        <div className={`game-item ${type} ${modifier}`}>
+        <div className={`game-item ${type}`}>
             <div className="game-item__content">
                 <img src={imgUrl[type]} alt={type}/>
             </div>

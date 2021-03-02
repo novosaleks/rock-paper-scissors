@@ -3,18 +3,19 @@ import React, { useState, useEffect } from 'react';
 import GameItem from '../../components/GameItem';
 import GameResult from '../../components/GameResult';
 
-import { gameItems, gameResult } from '../../types';
+import { gameItems, gameResult } from '../../utils/types';
+import { isGameItems } from '../../utils/typeCheckers';
 
-type baseProps = { 
-    playerSelection: gameItems, 
+type baseProps = {
+    playerSelection: gameItems,
     dropSelection: () => void
     changeScore: (diff: number) => void,
 }
-    
+
 type injectedProps = {
-    resultView: JSX.Element | null,
-    computerSelection: JSX.Element | null,
-    playerSelection: JSX.Element | null,
+    ResultView: JSX.Element | null,
+    ComputerSelection: JSX.Element | null,
+    PlayerSelection: JSX.Element | null,
 };
 
 const withGameProcess = () => (View: React.ComponentType<injectedProps>) => {
@@ -22,14 +23,21 @@ const withGameProcess = () => (View: React.ComponentType<injectedProps>) => {
         const [gameResult, setGameResult] = useState<gameResult | null>(null);
 
         useEffect(() => {
-            const computerSelectionNumber = Math.floor(Math.random() * 5),
-                  resultMap               = [
-                      [0, 1, -1, 1, -1],
-                      [-1, 0, 1, -1, 1],
-                      [1, -1, 0, 1, -1],
-                      [-1, 1, -1, 0, 1],
-                      [1, -1, 1, -1, 0],
-                  ];
+            const computerSelectionNumber = Math.floor(Math.random() * 5);
+
+            /*
+            INDEXES: 0 - spock, 1 - scissors, 2 - paper, 3 - rock, 4 - lizard
+            Values in array mean result: -1 = lose, 0 = draw, 1 = win.
+            Example: resultMap[0][1] means that player chose spock (0) and computer chose scissors (1).
+            The result is 1. It means spock heats scissors. Player win.
+            */
+            const resultMap = [
+                [0, 1, -1, 1, -1],
+                [-1, 0, 1, -1, 1],
+                [1, -1, 0, 1, -1],
+                [-1, 1, -1, 0, 1],
+                [1, -1, 1, -1, 0],
+            ];
 
             enum switchSelection {
                 spock,
@@ -42,34 +50,25 @@ const withGameProcess = () => (View: React.ComponentType<injectedProps>) => {
             const computerSelection = switchSelection[computerSelectionNumber];
             const result = resultMap[switchSelection[props.playerSelection]][computerSelectionNumber];
 
-            props.changeScore(result);
             setGameResult({ result, computerSelection });
-        }, [props.playerSelection]);
-
-        const isGameItems = (value: any): value is gameItems => {
-            return value === 'rock' || value === 'paper' || value === 'scissors' || value === 'lizard' || value === 'spock';
-        };
+        }, []);
 
         const computerSelection = gameResult && isGameItems(gameResult.computerSelection) ?
-            <GameItem type={gameResult.computerSelection} modifier='bg'/> : null;
+            <GameItem type={gameResult.computerSelection}/> : null;
 
-        const resultView = gameResult && typeof gameResult.result === 'number' ?
-            <div className="col-2 game-process-selection game-process-result">
-                <GameResult dropSelection={props.dropSelection} result={gameResult.result}/>
+        const resultView = gameResult ?
+            <div className="col-lg-3 col-md-4 col-12 order-1 order-md-0 game-process-result">
+                <GameResult changeScore={props.changeScore} dropSelection={props.dropSelection} result={gameResult.result}/>
             </div>
             : null;
 
         const playerSelection = props.playerSelection ?
-            <GameItem type={props.playerSelection} modifier='bg'/>
+            <GameItem type={props.playerSelection}/>
             : null;
 
-        if (gameResult) {
-            return <View resultView={resultView}
-                         computerSelection={computerSelection}
-                         playerSelection={playerSelection}/>;
-        }
-
-        return null;
+        return <View ResultView={resultView}
+                     ComputerSelection={computerSelection}
+                     PlayerSelection={playerSelection}/>;
     };
 };
 

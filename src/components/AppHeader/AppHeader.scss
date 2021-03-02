@@ -30,3 +30,13 @@
     }
   }
 }
+
+@media (max-width: 425px) {
+  .app-header__logo {
+    max-width: 70px;
+  }
+
+  .app-header__content-score {
+    width: 110px;
+  }
+}

@@ -1,10 +1,30 @@
-.app-footer__rules {
-  display: block;
-  background: none;
-  border: 1px solid #fff;
-  border-radius: 4px;
-  width: 100px;
-  margin: 0 1rem 0 auto;
-  line-height: 2;
-  font-weight: 700;
+.app-footer {
+  margin-top: 3rem;
+
+  &__rules {
+    display: block;
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    width: 100px;
+    margin-left: auto;
+    line-height: 2;
+    font-weight: 700;
+    transition: all .4s;
+
+    &:hover {
+      background: #fff;
+      color: #000;
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .app-footer {
+    margin-top: 7rem;
+
+    &__rules {
+      margin: 0 auto;
+    }
+  }
 }

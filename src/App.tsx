@@ -7,7 +7,7 @@ import AppModal from './components/AppModal';
 import PortalComponent from './containers/PortalComponent';
 import GameProcess from './components/GameProcess';
 
-import { gameItems } from './types';
+import { gameItems } from './utils/types';
 
 const App: React.FC = () => {
     const [isModalActive, toggleModal] = useState<boolean>(false);

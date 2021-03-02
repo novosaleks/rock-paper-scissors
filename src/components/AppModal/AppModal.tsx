@@ -17,10 +17,11 @@ const AppModal: React.FC<AppModalProps> = ({switchModal}) => {
                  className="modal">
                 <div className="modal__header">
                     <h2 className='modal__header-title dark'>RULES</h2>
-                    <img src={close} onClick={switchModal} alt='close' className='modal__header-close'/>
+                    <img src={close} onClick={switchModal} alt='close' className='modal__header-close close-desktop'/>
                 </div>
                 <div className="modal__content">
-                    <img src={rules} alt="rules"/>
+                    <img src={rules} alt="rules" className='modal__content-rules'/>
+                    <img src={close} onClick={switchModal} alt='close' className='modal__header-close close-mobile'/>
                 </div>
             </div>
         </div>

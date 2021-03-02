@@ -2,11 +2,48 @@
   margin-top: 3rem;
 
   &-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all .4s;
+    animation: fadeIn .8s;
+  }
+
+  &-result {
     text-align: center;
+    animation: fadeIn .8s;
   }
 
   &__item {
-    width: 300px;
+    width: 210px;
+    height: 210px;
     margin: 3rem auto 0;
   }
 }
+
+.empty-item {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .4);
+  border-radius: 50%;
+}
+
+@media (max-width: 1024px) {
+  .game-process__item {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 425px) {
+  .game-process-selection {
+    flex-direction: column-reverse;
+  }
+
+  .game-process__item {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+

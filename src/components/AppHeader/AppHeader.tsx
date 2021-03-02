@@ -13,7 +13,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({score}) => {
         <header className='app-header'>
             <div className="container">
                 <div className="app-header__content">
-                    <a href="/"><img src={logo} alt="logo"/></a>
+                    <a href="/"><img className='app-header__logo' src={logo} alt="logo"/></a>
                     <div className="app-header__content-score">
                         <div className='score_label'>SCORE</div>
                         <div className='score_point'>{score}</div>
