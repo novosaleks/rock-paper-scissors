@@ -11,10 +11,14 @@
     border: none;
     border-radius: 4px;
     color: #000;
+    &:hover {
+      color: #ac0000;
+    }
+
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .game-result {
     padding-top: 10px;
   }

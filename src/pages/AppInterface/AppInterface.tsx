@@ -3,7 +3,7 @@ import React from 'react';
 import pentagon from '../../assets/images/bg-pentagon.svg';
 
 import './AppInterface.scss';
-import GameItem from '../GameItem';
+import GameItem from '../../components/GameItem';
 import { gameItems } from '../../utils/types';
 
 interface AppInterfaceProps {

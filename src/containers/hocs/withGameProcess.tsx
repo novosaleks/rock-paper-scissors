@@ -13,9 +13,10 @@ type baseProps = {
 }
 
 type injectedProps = {
-    ResultView: JSX.Element | null,
-    ComputerSelection: JSX.Element | null,
-    PlayerSelection: JSX.Element | null,
+    ResultView: JSX.Element,
+    ComputerSelection: JSX.Element,
+    PlayerSelection: JSX.Element,
+    result: number,
 };
 
 const withGameProcess = () => (View: React.ComponentType<injectedProps>) => {
@@ -51,24 +52,27 @@ const withGameProcess = () => (View: React.ComponentType<injectedProps>) => {
             const result = resultMap[switchSelection[props.playerSelection]][computerSelectionNumber];
 
             setGameResult({ result, computerSelection });
-        }, []);
+        }, [props.playerSelection]);
+
+        const result = gameResult ? gameResult.result : 0;
 
         const computerSelection = gameResult && isGameItems(gameResult.computerSelection) ?
-            <GameItem type={gameResult.computerSelection}/> : null;
+            <GameItem type={gameResult.computerSelection}/> : <></>;
 
         const resultView = gameResult ?
-            <div className="col-lg-3 col-md-4 col-12 order-1 order-md-0 game-process-result">
-                <GameResult changeScore={props.changeScore} dropSelection={props.dropSelection} result={gameResult.result}/>
-            </div>
-            : null;
+            <GameResult changeScore={props.changeScore} dropSelection={props.dropSelection}
+                        result={result}/>
+            : <></>;
 
         const playerSelection = props.playerSelection ?
             <GameItem type={props.playerSelection}/>
-            : null;
+            : <></>;
 
         return <View ResultView={resultView}
                      ComputerSelection={computerSelection}
-                     PlayerSelection={playerSelection}/>;
+                     PlayerSelection={playerSelection}
+                     result={gameResult ? gameResult.result : 0}
+        />;
     };
 };
 

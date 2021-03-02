@@ -9,7 +9,8 @@ body {
     background: rgb(31, 55, 86);
     background: radial-gradient(circle at 50% 0, hsl(214, 47%, 23%) 0%, hsl(237, 49%, 15%) 100%);
     background-repeat: no-repeat;
-    min-height: 100vh;
+    min-height: 105vh;
+    padding: 3rem 0 7.5rem;
 }
 
 img {

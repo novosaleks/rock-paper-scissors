@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import AppHeader from './components/AppHeader';
-import AppInterface from './components/AppInterface';
+import AppInterface from './pages/AppInterface';
 import AppFooter from './components/AppFooter';
-import AppModal from './components/AppModal';
+import AppModal from './pages/AppModal';
 import PortalComponent from './containers/PortalComponent';
-import GameProcess from './components/GameProcess';
+import GameProcess from './pages/Game';
 
 import { gameItems } from './utils/types';
 
@@ -14,16 +14,28 @@ const App: React.FC = () => {
     const [playerSelection, selectItem] = useState<gameItems | null>(null);
     const [score, setScore] = useState<number>(0);
 
+    useEffect(() => {
+        const loadedScore = localStorage.getItem('game-score');
+
+        if (loadedScore) {
+            setScore(+loadedScore)
+        }
+    }, [])
+
+
     const switchModal = () => toggleModal(isModalActive => !isModalActive);
 
     const dropSelection = () => selectItem(null);
 
-    const changeScore = (diff: number) => setScore(value => {
+    const changeScore = (diff: number) => setScore((value: number) => {
         if (!value && diff !== 1) {
             return value;
         }
-        
-        return value + diff;
+
+        const newValue = value + diff;
+        localStorage.setItem('game-score', String(newValue));
+
+        return newValue;
     });
 
     const modal = isModalActive ?

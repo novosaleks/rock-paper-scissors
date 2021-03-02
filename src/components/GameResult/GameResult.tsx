@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import './GameResult.scss';
 
@@ -9,17 +9,19 @@ interface GameResultProps {
 }
 
 const GameResult: React.FC<GameResultProps> = ({ result, dropSelection, changeScore }) => {
+    const memoizedChangeScore = useCallback(() => changeScore(result), []);
+
     useEffect(() => {
-        changeScore(result);
-    }, []);
+        memoizedChangeScore();
+    }, [result, memoizedChangeScore]);
 
     enum transformResult {
-        lose = -1,
-        draw,
-        win
+        LOSE = -1,
+        DRAW,
+        WIN
     }
 
-    const message = transformResult[result] === 'draw' ? 'Draw!' : `You ${transformResult[result]}!`;
+    const message = transformResult[result] === 'DRAW' ? 'DRAW!' : `YOU ${transformResult[result]}!`;
 
     return (
         <div className='game-result'>
